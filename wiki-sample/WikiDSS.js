@@ -1,29 +1,39 @@
 /**
  * Created by AltonjiC on 10/4/14.
  */
-function scheduleJobs() {
+
+var serv = require("service.js");
+
+function init() {
     var file = "test1000.txt";
     var titles = getTitles(file);
-    var jobArray = [];
-    for (var i = 0;i < titles.length;i++) {
-//        var title = titles[i];
-//        var id;
-//        $.getJSON("http://en.wikipedia.org/w/api.php?format=json&action=query&titles="
-//        + title + "&prop=revisions&rvprop=content&callback=?&indexpageids", function (data) {
-//            id = data.query.pageids[0];
-//            var wikiText = data.query.pages[id].revisions[0]['*'];
-//            var re = /\[\[(.*?)\]\]/g;
-//            for (m = re.exec(wikiText); m; m = re.exec(wikiText)) {
-//                var entry = m[1];
-//                if (entry.indexOf("|") != -1) {
-//                    entry = entry.substring(0, entry.indexOf("|"));
-//                }
-//                if (entry.indexOf("#") != -1) {
-//                    entry = entry.substring(0, entry.indexOf("#"));
-//                }
-//                console.log(entry);
-//            }
-//        }
+    var Array = [];
+
+    var getReferencedArticles = function(titleArr) {
+        var title = titleArr[0];
+        var id;
+        $.getJSON("http://en.wikipedia.org/w/api.php?format=json&action=query&titles="
+            + title + "&prop=revisions&rvprop=content&callback=?&indexpageids", function (data) {
+            id = data.query.pageids[0];
+            var wikiText = data.query.pages[id].revisions[0]['*'];
+            var re = /\[\[(.*?)\]\]/g;
+            for (m = re.exec(wikiText); m; m = re.exec(wikiText)) {
+                var entry = m[1];
+                if (entry.indexOf("|") != -1) {
+                    entry = entry.substring(0, entry.indexOf("|"));
+                }
+                if (entry.indexOf("#") != -1) {
+                    entry = entry.substring(0, entry.indexOf("#"));
+                }
+                console.log(entry);
+            }
+        });
+    }
+
+    var functionAsString = "" + getReferencedArticles;
+
+    for (var i = 0; i < titles.length; i++) {
+        serv.addJob(functionAsString, [titles[i]]);  // need to create service.js and implement addJob()
     }
 
     function getTitles(file) {
@@ -48,6 +58,6 @@ function scheduleJobs() {
     }
 }
 
-//function onJobFinished(var titleArray) {
-//
-//}
+function onJobFinished(var titleArray) {
+    //update hash with array
+}
