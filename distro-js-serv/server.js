@@ -19,7 +19,7 @@ mongoose.connect('mongodb://localhost:27017/distro');
 // Models
 var User = require('./models/user');
 var Client = require('./models/client');
-var Service = require('./models/service');
+var DSS = require('./models/dss');
 
 // views as directory for all template files
 app.set('views', path.join(__dirname, 'views'));

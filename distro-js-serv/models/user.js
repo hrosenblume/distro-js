@@ -6,5 +6,5 @@ var UserSchema = new Schema({
 	email: String,
 	googleId: String,
 	clients: [{type: mongoose.Schema.Types.ObjectId, ref: 'Client'}],
-	services: [{type: mongoose.Schema.Types.ObjectId, ref: 'Service'}]
+	services: [{type: mongoose.Schema.Types.ObjectId, ref: 'DistributedSpawnedService'}]
 })
