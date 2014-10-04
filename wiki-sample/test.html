@@ -2,25 +2,27 @@
 <html>
 <head>
     <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="WikiDSS.js"></script>
     <script>
-        var title = "Georgia Institute of Technology";
-        var id;
-        $.getJSON("http://en.wikipedia.org/w/api.php?format=json&action=query&titles="
-        + title + "&prop=revisions&rvprop=content&callback=?&indexpageids", function (data) {
-            id = data.query.pageids[0]
-            var yo = data.query.pages[id].revisions[0]['*'];
-            var re= /\[\[(.*?)\]\]/g;
-            for(m = re.exec(yo); m; m = re.exec(yo)){
-                var entry = m[1];
-                if (entry.indexOf("|") != -1) {
-                    entry = entry.substring(0, entry.indexOf("|"));
-                }
-                if (entry.indexOf("#") != -1) {
-                    entry = entry.substring(0, entry.indexOf("#"));
-                }
-                console.log(entry);
-            }
-        });
+        scheduleJobs();
+//        var title = "Georgia Institute of Technology";
+//        var id;
+//        $.getJSON("http://en.wikipedia.org/w/api.php?format=json&action=query&titles="
+//        + title + "&prop=revisions&rvprop=content&callback=?&indexpageids", function (data) {
+//            id = data.query.pageids[0]
+//            var yo = data.query.pages[id].revisions[0]['*'];
+//            var re = /\[\[(.*?)\]\]/g;
+//            for(m = re.exec(yo); m; m = re.exec(yo)){
+//                var entry = m[1];
+//                if (entry.indexOf("|") != -1) {
+//                    entry = entry.substring(0, entry.indexOf("|"));
+//                }
+//                if (entry.indexOf("#") != -1) {
+//                    entry = entry.substring(0, entry.indexOf("#"));
+//                }
+//                console.log(entry);
+//            }
+//        });
     </script>
 </head>
 </html>
