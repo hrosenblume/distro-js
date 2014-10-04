@@ -9,4 +9,7 @@ var ClientSchema = new Schema({
 	status: {type: String, enum: ["unavailable", "ready", "running"]},
 	lastConnect: Date,
 	jobSent: Date
-})
+});
+
+module.exports = mongoose.model('Client', ClientSchema);
+
