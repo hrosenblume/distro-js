@@ -1,0 +1,15 @@
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+
+distro-js-serv/pids
+distro-js-serv/logs
+distro-js-serv/results
+distro-js-serv/build
+
+distro-js-serv/node_modules
