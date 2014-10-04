@@ -58,6 +58,6 @@ function init() {
     }
 }
 
-function onJobFinished(var titleArray) {
+function onJobFinished(titleArray) {
     //update hash with array
 }
