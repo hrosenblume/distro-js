@@ -12,7 +12,6 @@ var googleStategy = require('passport-google');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-
 // Connect to DB
 mongoose.connect('mongodb://localhost:27017/distro');
 
@@ -34,7 +33,9 @@ var dssRouter = require('./routes/dss');
 // Initialize servicemanager
 var servicemanager = require('./scripts/servicemanager')
 
-// Passport
+// Routers
+var homeRouter = require('./routes/home');
+var jobRouter = require('./routes/job');
 
 // views as directory for all template files
 app.set('views', path.join(__dirname, 'views'));
@@ -50,6 +51,7 @@ app.use(passport.session());
 
 // set routes
 app.use('/', homeRouter);
+app.use('/job/', jobRouter);
 app.use('/auth/google', googleRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/dss', dssRouter);
