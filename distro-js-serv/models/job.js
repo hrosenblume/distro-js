@@ -4,11 +4,11 @@ var Schema = mongoose.Schema;
 var JobSchema = new Schema({
 	name: String,
 	dss: {type: mongoose.Schema.Types.ObjectId, ref: "DSS"},
-	state: {type: String, enum: ["Running", "Failed", "Success"]},
+	state: {type: String, enum: ["running", "pending", "failed", "success"], default: "pending"},
 	func: String,
-	params: [{type: String}],
+	params: [{type: Object}],
 	client: {type: mongoose.Schema.Types.ObjectId, ref: "Client"},
-	added: Date
+	added: {type: Date, default: Date.now}
 })
 
 module.exports = mongoose.model('Job', JobSchema);

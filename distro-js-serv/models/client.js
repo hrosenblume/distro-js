@@ -7,9 +7,8 @@ var ClientSchema = new Schema({
 	socketId: String,
 	job: {type: mongoose.Schema.Types.ObjectId, ref: 'Job'},
 	user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-	status: {type: String, enum: ["unavailable", "ready", "running"]},
-	lastConnect: Date,
-	jobSent: Date
+	status: {type: String, enum: ["unavailable", "ready", "running"], default: "unavailable"},
+	lastJob: {type: Date, default: Date.now}
 });
 
 module.exports = mongoose.model('Client', ClientSchema);

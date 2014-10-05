@@ -3,7 +3,7 @@
  */
 
 var serv = require("service.js");
-
+var h = [];
 function init() {
     var file = "test1000.txt";
     var titles = getTitles(file);
@@ -59,5 +59,16 @@ function init() {
 }
 
 function onJobFinished(titleArray) {
-    //update hash with array
+    for (var i = 0; i < titleArray.length; i++) {
+        title = titleArray[i];
+        if (title in h) {
+            h[title]++;
+        } else {
+            h[title] = 1;
+        }
+    }
+}
+
+function onFinish() {
+
 }
