@@ -1,7 +1,8 @@
 /**
  * Created by AltonjiC on 10/4/14.
  */
-var h = [];
+var hashTable = [];
+var
 
 this.onmessage = function(event) {
     if (event.data.task == 'kill') { 
@@ -49,7 +50,7 @@ function init() {
             titleArray.push(title);
         }
         console.log("there are " + titleArray.length + " titles" );
-        console.log(titleArray);
+        // console.log(titleArray);
         return titleArray;
     }
 
@@ -71,13 +72,13 @@ function onJobFinished(titleArray) {
     for (var i = 0; i < titleArray.length; i++) {
         // console.log(titleArray[i]);
         title = titleArray[i];
-        if (h[title] >=0 ) {
-            h[title]++;
+        if (hashTable[title] >=0 ) {
+            hashTable[title]++;
         } else {
-            h[title] = 1;
+            hashTable[title] = 1;
         }
     }
-    console.log("HASH:", h);
+    console.log(hashTable);
 }
 
 function onFinish() {

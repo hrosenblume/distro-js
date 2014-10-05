@@ -22,7 +22,6 @@
     "paralleljs": "^0.2.1",
     "passport": "^0.2.1",
     "passport-google": "^0.3.0",
-    "session": "^0.1.0",
     "socket.io": "^1.1.0",
     "webworker": "^0.8.4",
     "webworker-threads": "^0.5.1"

@@ -5,7 +5,7 @@ var self = this;
 // Import models
 var mongoose = require('mongoose');
 var Client = mongoose.model('Client');
-var Dss = mongoose.model('Dss');
+var Dss = mongoose.model('DSS');
 var Job = mongoose.model('Job');
 var ObjectId = mongoose.Schema.Types.ObjectId;
 

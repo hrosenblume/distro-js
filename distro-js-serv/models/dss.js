@@ -8,4 +8,4 @@ var DeveloperSpawnedServiceSchema = new Schema({
 	status: {type: String, enum: ["run", "stop"]}
 }, {collection: "dss"});
 
-module.exports = mongoose.model('Dss', DeveloperSpawnedServiceSchema);
+module.exports = mongoose.model('DSS', DeveloperSpawnedServiceSchema);
