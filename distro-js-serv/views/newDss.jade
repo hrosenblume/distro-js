@@ -1,0 +1,8 @@
+extends layout
+block content
+    .main
+        user #{user}
+        form(action='../dss',method='post')
+            input(type='text', name='name', placeholder="DSS Name")
+            input(type='text', name='code', value="require('service.js')\nfunction init() {}\n\nfunction onJobFinished(data) {}\n\nfunction onFinished() {}")
+            input(type='submit', name='submit')

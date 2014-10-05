@@ -19,16 +19,17 @@ mongoose.connect('mongodb://localhost:27017/distro');
 // Models
 var Job = require('./models/job');
 var Client = require('./models/client');
-var DSS = require('./models/dss');
+var Dss = require('./models/dss');
 var User = require('./models/user');
 
 // Passport config
 require('./config/passport');
 
-
+// Routes
 var homeRouter = require('./routes/home');
 var googleRouter = require('./routes/google');
 var dashboardRouter = require('./routes/dashboard');
+var dssRouter = require('./routes/dss');
 
 // Initialize servicemanager
 var servicemanager = require('./scripts/servicemanager')
@@ -51,6 +52,7 @@ app.use(passport.session());
 app.use('/', homeRouter);
 app.use('/auth/google', googleRouter);
 app.use('/dashboard', dashboardRouter);
+app.use('/dss', dssRouter);
 
 // Start service manager
 servicemanager.start(io);
