@@ -10,7 +10,6 @@ var passport = require('passport');
 var googleStategy = require('passport-google');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-var servicemanager = require('./scripts/servicemanager');
 
 var homeRouter = require('./routes/home');
 
