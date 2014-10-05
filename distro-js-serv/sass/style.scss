@@ -1,3 +1,274 @@
-h1 {
-	color: blue;
+.main {
+	width: 100%;
+	font-size: 12px;
+}
+
+body {
+	margin: 0;
+	font-family: 'Roboto', sans-serif;
+}
+
+.button-ongreen {
+	font-size: 2em;
+	line-height: 1.5em;
+	height: 40px;
+	max-width: 10em;
+	text-align: center;
+	display: block;
+	margin: 0 auto;
+	margin-bottom: 0.25em;
+	padding-left: 2em;
+	padding-right: 2em;
+	font-weight: 300;
+	color: white;
+	background-color: rgba(129, 228, 194, 0.0);
+	border: 1px solid rgba(255, 255, 255, 1.0);
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+	&:hover {
+		background-color: rgba(255, 255, 255, 0.3);
+		-webkit-transition: all 0.3s ease-in-out;
+	    -moz-transition: all 0.3s ease-in-out;
+	    -ms-transition: all 0.3s ease-in-out;
+	    -o-transition: all 0.3s ease-in-out;
+	    transition: all 0.3s ease-in-out;
+	}
+}
+
+.homepage-header {
+	background-color: #52cd72;
+	h1 {
+		color: #fcfcfc;
+		font-family: 'Yellowtail';
+		font-size: 5em;
+		line-height: 1em;
+		font-weight: 400;
+		text-align: center;
+		margin: 0;
+		margin-top: 0.25em;
+		@media (min-width: 640px) {
+			font-size: 7em;
+		}
+		@media (min-width: 960px) {
+			font-size: 7em;
+		}
+	}
+	h2 {
+		color: #fcfcfc;
+		font-size: 1em;
+		font-weight: 700;
+		text-align: center;
+		margin: 0;
+		@media (min-width: 640px) {
+			font-size: 1.5em;
+		}
+		@media (min-width: 960px) {
+			font-size: 1.5em;
+		}
+	}
+	.center-attention {
+		margin: 0 auto;
+		max-width: 80em;
+	}
+	.logo {
+		margin: 0 auto;
+		width: 200px; 
+		height: 200px;
+		@media (min-width: 640px) {
+			width: 300px; 
+			height: 300px;
+		}
+		@media (min-width: 960px) {
+			width: 300px; 
+			height: 300px;
+		}
+		img {
+			max-width:100%; 
+			max-height:100%;
+		}
+	}
+	.height-filler {
+		height: auto;
+		position: relative;
+		padding-top: 2em;
+		padding-bottom: 2em;
+		margin: 0 auto;
+		@media (min-width: 640px) {
+			height: 13em;
+		}
+		@media (min-width: 960px) {
+			height: 15em;
+		}
+	}
+	.height-filler-top {
+		height: 5em;
+		position: relative;
+	}
+}
+
+.intro-text {
+  .center-attention {
+    margin: 0 auto;
+    max-width: 80em;
+  }
+  .two-collumn {
+    color: #424242;
+    margin: 0 auto;
+    display: block;
+    .panel {
+      margin: 0 auto;
+      padding: 1em;
+      max-width: 40em;
+      h1 {
+        font-size: 2.0em;
+        @media (min-width: 640px) {
+          font-size: 2.5em;
+        }
+      }
+      h2 {
+        font-size: 0.7em;
+        @media (min-width: 280px) {
+          font-size: 1em;
+        }
+        @media (min-width: 640px) {
+          font-size: 1.5em;
+        }
+      }
+      @media (min-width: 960px) {
+        float: left;
+        padding: 1em;
+      }
+      .download-button {
+        text-align: center;
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 2.25em;
+        margin-top: 1.5em;
+        padding: 0.5em;
+        font-weight: 300;
+        color: white;
+        background-color: rgba(251, 187, 119, 1.0);
+        cursor: pointer;
+        -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+        -ms-transition: all 0.3s ease-in-out;
+        -o-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+        &:hover {
+          background-color: rgba(251, 187, 119, 0.4);
+          -webkit-transition: all 0.3s ease-in-out;
+          -moz-transition: all 0.3s ease-in-out;
+          -ms-transition: all 0.3s ease-in-out;
+          -o-transition: all 0.3s ease-in-out;
+          transition: all 0.3s ease-in-out;
+        }
+      }
+    }
+    @media (min-width: 960px) {
+      display: table;
+    }
+  }
+}
+
+.aloha {
+	background-size: cover;
+	background: url(../img/beach.jpg) no-repeat center center;
+	h1 {
+		color: #313131;
+		font-family: 'Yellowtail';
+		font-size: 5em;
+		line-height: 1em;
+		font-weight: 400;
+		text-align: center;
+		margin: 0 auto;
+		margin-top: 0.25em;
+		@media (min-width: 640px) {
+			font-size: 7em;
+		}
+		@media (min-width: 960px) {
+			font-size: 7em;
+		}
+	}
+	.center-attention {
+		margin: 0 auto;
+		max-width: 80em;
+		height: 30em;
+		.center {
+			margin: 0 auto;
+			line-height: 6em;
+			@media (min-width: 640px) {
+				line-height: 5.5em;
+			}
+			@media (min-width: 960px) {
+				line-height: 7em;
+			}
+		}
+	}
+	@media (min-width: 640px) {
+		height: 40em;
+	}
+	@media (min-width: 960px) {
+		height: 50em;
+	}
+}
+
+.use-case {
+  padding: 1em;
+  margin-bottom: 2em;
+  h1 {
+    color: #313131;
+    font-family: 'Yellowtail';
+    font-size: 5em;
+    line-height: 2em;
+    font-weight: 400;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 0.25em;
+  }
+  h2 {
+    font-size: 1.25em;
+    text-align: center;
+    @media (min-width: 640px) {
+      font-size: 1.5em;
+    }
+    @media (min-width: 960px) {
+      font-size: 2em
+    }
+  }
+  p {
+    font-size: 1.25em;
+    margin-bottom: 2em;
+  }
+  .center-attention {
+    margin: 0 auto;
+    max-width: 80em;
+    .center {
+      margin: 0 auto;
+    }
+  }
+}
+
+.how-to {
+  h1 {
+    color: #313131;
+    font-family: 'Yellowtail';
+    font-size: 5em;
+    line-height: 2em;
+    font-weight: 400;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 0.25em;
+  }
+  .center-attention {
+    margin: 0 auto;
+    max-width: 80em;
+    height: 30em;
+    .center {
+      margin: 0 auto;
+    }
+  }
 }

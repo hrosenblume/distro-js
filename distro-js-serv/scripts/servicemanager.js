@@ -148,6 +148,7 @@ self.start  = function(io){
 		});
 	}
 
+
 	function onDisconnect(socket, client) {
 	//when disconnect from client
 		Client.update(client, {status: "unavailable"}, function(err) {

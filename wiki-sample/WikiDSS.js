@@ -12,12 +12,14 @@ function init() {
     var getReferencedArticles = function(titleArr) {
         var title = titleArr[0];
         var id;
-        $.getJSON("http://en.wikipedia.org/w/api.php?format=json&action=query&titles="
+        $.get("http://en.wikipedia.org/w/api.php?format=xml&action=query&titles="
             + title + "&prop=revisions&rvprop=content&callback=?&indexpageids", function (data) {
-            id = data.query.pageids[0];
-            var wikiText = data.query.pages[id].revisions[0]['*'];
+            $xml = $(data),
+                $wikitext = $xml.find("rev");
+            var text = $wikitext.text();
             var re = /\[\[(.*?)\]\]/g;
-            for (m = re.exec(wikiText); m; m = re.exec(wikiText)) {
+            var returnArr = [];
+            for (m = re.exec(text); m; m = re.exec(text)) {
                 var entry = m[1];
                 if (entry.indexOf("|") != -1) {
                     entry = entry.substring(0, entry.indexOf("|"));
@@ -25,8 +27,9 @@ function init() {
                 if (entry.indexOf("#") != -1) {
                     entry = entry.substring(0, entry.indexOf("#"));
                 }
-                console.log(entry);
+                returnArr.push(entry);
             }
+            return returnArr;
         });
     }
 

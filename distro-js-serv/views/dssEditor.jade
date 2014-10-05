@@ -1,0 +1,11 @@
+extends layout
+block content
+    .main
+        user #{user}
+        name #{name}
+        fileContents #{fileContents}
+
+        form(action='../dss',method='post')
+            input(type='text', name='name', value={name})
+            input(type='text', name='code', value={fileContents})
+            input(type='submit', name='submit')
