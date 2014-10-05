@@ -8,72 +8,103 @@ var Client = mongoose.model('Client');
 var DSS = mongoose.model('DSS');
 var Job = mongoose.model('Job');
 
-// Global control of running state
-var running = true;
-var clients = [];
 
 // Background Process Manager
-// var procManager = require('./backgroundprocessmanager.js');
+var procManager = require('./backgroundprocessmanager.js');
 
-self.start  = function(){
+self.start  = function(io){
+
 	// procManager.init(self);
+	// var sockets = io.connected;
+	
 	console.log("Starting service manager");
-	// Some logic here
-}
 
-self.kill = function() {
-	running = false;
-}
+	//Socket Listeners
+	self.onConnect = function(socket) {
+		// Request authentication browserId
+		socket.emit('requestAuth');
+		// On response
+		socket.on('sendAuth', function(data) {
+			var browserId = data.browserId;
+			// Update or create client where the status is ready
+			Client.findOneAndUpdate({browserId: browserId},
+				{status: "ready", socketId: socket.id},
+				{upsert: true}, function (err, client) {
+					if (err) {
+						console.log(err);
+					} else {
+						console.log("Client authenticated: " + client);	
 
-//Socket Listeners
-self.onConnect = function(socket) {
-	// Request authentication browserId
-	socket.emit('requestAuth');
-	// On response
-	socket.on('sendAuth', function(data) {
-		var browserId = data.browserId;
-		// Update or create client where the status is ready
-		Client.findOneAndUpdate({browserId: browserId},
-			{status: "ready", socketId: socket.id},
-			{upsert: true}, function (err, client) {
-				if (err) {
-					console.log(err);
-				} else {
-					console.log("Client authenticated: " + client);	
-					self.start();
-					// When client disconnects
-					socket.on('disconnect' , function() {
-						onDisconnect(socket, client);
-					});
+						// When client disconnects
+						socket.on('disconnect' , function() {
+							onDisconnect(socket, client);
+						});
 
-					// When job completes successfully
-					socket.on('jobSuccess', function(data) {
-						onJobSuccess(socket, client, data);
-					});
+						// When job completes successfully
+						socket.on('jobSuccess', function(data) {
+							onJobSuccess(socket, client, data);
+						});
 
-					// When job completes with an error
-					socket.on('jobError', function(data) {
-						onJobError(socket, client, data);
-					});
-				}
+						// When job completes with an error
+						socket.on('jobError', function(data) {
+							onJobError(socket, client, data);
+						});
+
+						// This is the example format for a test job
+						var testJob = {
+							func: "function start(params) { console.log(params) }",
+							params: ["Hello", "World", "!"]
+						}
+						test(io, testJob);
+						// End Test
+					}
+			});
+			// Make the client unavailable if they disconnect
+			
 		});
-		// Make the client unavailable if they disconnect
-		
-	});
-	//when connect to client
+		//when connect to client
+	}
+
+	//DSS Listeners
+	self.addJob = function (job) {
+		// Add job
+		Job.insert(job, function(err, inserted) {
+			if (err) { console.log(err);}
+			else {
+				console.log("Added job: ", inserted);
+			}
+		});
+
+
+		Client.findOne({state: "ready"}, {sort: {lastJob: 1}}, function (err, client) {
+			if (err) {
+				console.log(err);
+			} else {
+				console.log(client);
+			}
+		});
+	}
 }
 
-// LEAVE UNIMPLEMENTED
-//DSS Listeners
-self.addJobToDB = function (job) {
-	Client.find({state: "ready"}, function (err, results) {
-		if (err) {
-			console.log(err);
-		} else {
-			console.log(results);
+// Test config
+function test(io, job) {
+	var ObjectId = require('mongodb').ObjectID;
+	Client.findOne({}, function(err, client) {
+		if (err) {console.log(err);} 
+		else {
+			var sockets = io.sockets.connected;
+			var socket = sockets[client.socketId];
+			if (socket) {
+				console.log("Sending job", job);
+				socket.emit('sendJob', {func: job.func, params: job.params});
+			} else {
+				console.log("Client socket is not connected");
+			}
 		}
 	});
 }
+
+
 
 function onDisconnect(socket, client) {
 	//when disconnect from client
