@@ -10,7 +10,7 @@ var passport = require('passport');
 var googleStategy = require('passport-google');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-var servicemanager = require('./scripts/servicemanager')
+var servicemanager = require('./scripts/servicemanager');
 
 var homeRouter = require('./routes/home');
 
@@ -40,7 +40,7 @@ io.on('connection', function(socket) {
 });
 
 // Set server port
-http.listen(4000, function(){
-	console.log('server is running on port 4000');
+http.listen(3000, function(){
+	console.log('server is running on port 3000');
 	servicemanager.start();
 });

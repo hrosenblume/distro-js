@@ -1,7 +1,9 @@
 var mongoose = require('mongoose');
+var backgroundprocessmanager = require('./backgroundprocessmanager');
 
 function start() {
-
+	console.log("servicemanager started");
+	startDSS("hello");
 }
 
 //Socket Listeners
@@ -41,11 +43,12 @@ function killJobOnClient(client) {
 
 //DSS Calls to Action
 function startDSS(dss) {
-
+	console.log('Starting BPM in servicemanger');
+	backgroundprocessmanager.start(dss);
 }
 
 function killDSS(dss) {
-
+	backgroundprocessmanager.kill(dss);
 }
 
 exports.start = start;
