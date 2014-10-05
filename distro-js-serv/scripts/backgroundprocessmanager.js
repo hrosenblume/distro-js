@@ -41,12 +41,13 @@ self.init = function(servicemanager) {
 				result: data.result
 			})
 		}
-		// processes[dss.name] = worker;
+		processes[dss._id] = self;
+		return self;
 	}
 
 	// Kill passed in killed DSS
 	self.kill = function(dss) {
-		processes[dss.filename].postMessage('kill');
+		processes[dss._id].postMessage('kill');
 		delete processes[dss.filename];
 	}
 

@@ -2,7 +2,6 @@
  * Created by AltonjiC on 10/4/14.
  */
 var hashTable = [];
-var
 
 this.onmessage = function(event) {
     if (event.data.task == 'kill') { 
@@ -69,6 +68,7 @@ var rawTitles = "590:10:AccessibleComputing \
 }
 
 function onJobFinished(titleArray) {
+
     for (var i = 0; i < titleArray.length; i++) {
         // console.log(titleArray[i]);
         title = titleArray[i];
@@ -77,8 +77,10 @@ function onJobFinished(titleArray) {
         } else {
             hashTable[title] = 1;
         }
+
     }
-    console.log(hashTable);
+    // hashTable.sort(function (a, b) { return b-a; });
+    console.log("Results: ", hashTable);
 }
 
 function onFinish() {
