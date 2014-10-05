@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+</head>
+<body>
+    <script src="socket.io/node_modules/socket.io/node_modules/socket.io-client/socket.io.js"></script>
+    <script>
+        var userid = "89234";
+        var socket = io.connect('http://localhost:3000');
+        socket.on('requestAuth', function (data) {
+            console.log(data);
+            if (userid) {
+                useToken(userid);
+            } else {
+                userid = getRandomToken();
+//                chrome.storage.sync.set({userid: userid}, function() {
+                useToken(userid);
+//                });
+            }
+            function useToken(userid) {
+                socket.emit('sendAuth', { browserId: userid });
+            }
+        });
+
+        function getRandomToken() {
+            // E.g. 8 * 32 = 256 bits token
+            var randomPool = new Uint8Array(32);
+            crypto.getRandomValues(randomPool);
+            var hex = '';
+            for (var i = 0; i < randomPool.length; ++i) {
+                hex += randomPool[i].toString(16);
+            }
+            // E.g. db18458e2782b2b77e36769c569e263a53885a9944dd0a861e5064eac16f1a
+            return hex;
+        }
+
+        socket.on('newJob', function (data) {
+            try {
+                console.log(data);
+                generatedData = recieveInfo(data[0], data[1]);
+                socket.emit('success', { array: generatedData });
+            } catch (err) {
+                socket.emit('success', { error_obj: err});
+            }
+        });
+
+        function recieveInfo(functionText, params) {
+            eval(functionText);
+            return test(params);
+        }
+    </script>
+</body>
+</html>

@@ -7,7 +7,7 @@
   "icons": { "128": "icon_128.png" },
   "background": {
     "persistent": false,
-    "scripts": ["jquery.js","connect.js"]
+    "scripts": ["jquery.js","node_modules/socket.io/node_modules/socket.io-client/socket.io.js","connect.js"]
   },
   "browser_action": {
     "default_icon": "icon_128.png"
