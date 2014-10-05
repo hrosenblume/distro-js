@@ -21,7 +21,12 @@ body {
   color: white;
   background-color: rgba(129, 228, 194, 0);
   border: 1px solid white;
-  cursor: pointer; }
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out; }
   .button-ongreen:hover {
     background-color: rgba(255, 255, 255, 0.3);
     -webkit-transition: all 0.3s ease-in-out;
@@ -93,6 +98,61 @@ body {
     height: 5em;
     position: relative; }
 
+.intro-text .center-attention {
+  margin: 0 auto;
+  max-width: 80em; }
+.intro-text .two-collumn {
+  color: #424242;
+  margin: 0 auto;
+  display: block; }
+  .intro-text .two-collumn .panel {
+    margin: 0 auto;
+    padding: 1em;
+    max-width: 40em; }
+    .intro-text .two-collumn .panel h1 {
+      font-size: 2.0em; }
+      @media (min-width: 640px) {
+        .intro-text .two-collumn .panel h1 {
+          font-size: 2.5em; } }
+    .intro-text .two-collumn .panel h2 {
+      font-size: 0.7em; }
+      @media (min-width: 280px) {
+        .intro-text .two-collumn .panel h2 {
+          font-size: 1em; } }
+      @media (min-width: 640px) {
+        .intro-text .two-collumn .panel h2 {
+          font-size: 1.5em; } }
+    @media (min-width: 960px) {
+      .intro-text .two-collumn .panel {
+        float: left;
+        padding: 1em; } }
+    .intro-text .two-collumn .panel .download-button {
+      text-align: center;
+      display: block;
+      margin: 0 auto;
+      margin-bottom: 2.25em;
+      margin-top: 1.5em;
+      padding: 0.5em;
+      font-weight: 300;
+      color: white;
+      background-color: #fbbb77;
+      cursor: pointer;
+      -webkit-transition: all 0.3s ease-in-out;
+      -moz-transition: all 0.3s ease-in-out;
+      -ms-transition: all 0.3s ease-in-out;
+      -o-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out; }
+      .intro-text .two-collumn .panel .download-button:hover {
+        background-color: rgba(251, 187, 119, 0.4);
+        -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+        -ms-transition: all 0.3s ease-in-out;
+        -o-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out; }
+  @media (min-width: 960px) {
+    .intro-text .two-collumn {
+      display: table; } }
+
 .aloha {
   background-size: cover;
   background: url(../img/beach.jpg) no-repeat center center; }
@@ -131,4 +191,48 @@ body {
     .aloha {
       height: 50em; } }
 
-/*# sourceMappingURL=style.css.map */
+.use-case {
+  padding: 1em;
+  margin-bottom: 2em; }
+  .use-case h1 {
+    color: #313131;
+    font-family: 'Yellowtail';
+    font-size: 5em;
+    line-height: 2em;
+    font-weight: 400;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 0.25em; }
+  .use-case h2 {
+    font-size: 1.25em;
+    text-align: center; }
+    @media (min-width: 640px) {
+      .use-case h2 {
+        font-size: 1.5em; } }
+    @media (min-width: 960px) {
+      .use-case h2 {
+        font-size: 2em; } }
+  .use-case p {
+    font-size: 1.25em;
+    margin-bottom: 2em; }
+  .use-case .center-attention {
+    margin: 0 auto;
+    max-width: 80em; }
+    .use-case .center-attention .center {
+      margin: 0 auto; }
+
+.how-to h1 {
+  color: #313131;
+  font-family: 'Yellowtail';
+  font-size: 5em;
+  line-height: 2em;
+  font-weight: 400;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 0.25em; }
+.how-to .center-attention {
+  margin: 0 auto;
+  max-width: 80em;
+  height: 30em; }
+  .how-to .center-attention .center {
+    margin: 0 auto; }

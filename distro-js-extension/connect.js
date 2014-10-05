@@ -1,22 +1,23 @@
 //$.getScript("node_modules/socket.io/node_modules/socket.io-client/socket.io.js", function(){
 //    console.log("succesful import of socket.io.js");
 //});
-
-chrome.browserAction.onClicked.addListener(function() {
-    toggleDead();
-});
+//
+//chrome.browserAction.onClicked.addListener(function() {
+//    toggleDead();
+//});
 
 var alive = false;
 
-function toggleDead() {
-    if (alive) {
-        kill();
-    } else {
-        alive = true;
-        chrome.browserAction.setBadgeText({text:"on"});
-        console.log("alive");
-    }
-}
+
+//function toggleDead() {
+//    if (alive) {
+//        kill();
+//    } else {
+//        alive = true;
+//        chrome.browserAction.setBadgeText({text:"on"});
+//        console.log("alive");
+//    }
+//}
 
 function kill() {
     alive = false;
@@ -89,13 +90,14 @@ function setup() {
     });
 
     socket.on('sendJob', function (data) {
+        console.log("got a job?");
         if (alive) {
             try {
-                //            loadScript("url/script/id", function sendDataBack() {
-                //                generatedData = run();
-                //                socket.emit('success', { array: generatedData });
-                //            });
-
+//                loadScript("http://altonji.com/js/example.js", function sendDataBack() {
+                   recieveInfo(data.func, data.params);
+//                    generatedData = recie(["King Arthur"]);
+                    socket.emit('success', { array: generatedData });
+//                });
             } catch (err) {
                 socket.emit('success', { error: err});
             }
@@ -105,25 +107,67 @@ function setup() {
     });
 
     function recieveInfo(functionText, params) {
+        console.log(functionText, params);
         eval(functionText);
-        return start(params);
+        start(params);
     }
 
-    function loadScript(url, callback) {
-        // Adding the script tag to the head as suggested before
-        var head = document.getElementsByTagName('head')[0];
-        var script = document.createElement('script');
-        script.type = 'text/javascript';
-        script.src = url;
-
-        // Then bind the event to the callback function.
-        // There are several events for cross browser compatibility.
-        script.onreadystatechange = callback;
-        script.onload = callback;
-
-        // Fire the loading
-        head.appendChild(script);
+    var getReferencedArticles = function(titleArr) {
+        var title = titleArr[0];
+        var id;
+        $.get("http://en.wikipedia.org/w/api.php?format=xml&action=query&titles="
+            + title + "&prop=revisions&rvprop=content&callback=?&indexpageids", function( data ) {
+            $xml = $( data ),
+            $wikitext = $xml.find( "rev" );
+            var text = $wikitext.text();
+            var re = /\[\[(.*?)\]\]/g;
+            var returnArr = [];
+            for (m = re.exec(text); m; m = re.exec(text)) {
+                var entry = m[1];
+                if (entry.indexOf("|") != -1) {
+                    entry = entry.substring(0, entry.indexOf("|"));
+                }
+                if (entry.indexOf("#") != -1) {
+                    entry = entry.substring(0, entry.indexOf("#"));
+                }
+                console.log(entry);
+                returnArr.push(entry);
+            }
+            return returnArr;
+        });
+//        $.getJSON("http://en.wikipedia.org/w/api.php?format=json&action=query&titles="
+//            + title + "&prop=revisions&rvprop=content&callback=?&indexpageids", function (data) {
+//            id = data.query.pageids[0];
+//            var wikiText = data.query.pages[id].revisions[0]['*'];
+//            var re = /\[\[(.*?)\]\]/g;
+//            for (m = re.exec(wikiText); m; m = re.exec(wikiText)) {
+//                var entry = m[1];
+//                if (entry.indexOf("|") != -1) {
+//                    entry = entry.substring(0, entry.indexOf("|"));
+//                }
+//                if (entry.indexOf("#") != -1) {
+//                    entry = entry.substring(0, entry.indexOf("#"));
+//                }
+//            }
+//        });
+        return ["kitty"];
     }
+
+//    function loadScript(url, callback) {
+//        // Adding the script tag to the head as suggested before
+//        var head = document.getElementsByTagName('head')[0];
+//        var script = document.createElement('script');
+//        script.type = 'text/javascript';
+//        script.src = url;
+//
+//        // Then bind the event to the callback function.
+//        // There are several events for cross browser compatibility.
+//        script.onreadystatechange = callback;
+//        script.onload = callback;
+//
+//        // Fire the loading
+//        head.appendChild(script);
+//    }
 
 
 }

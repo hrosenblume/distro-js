@@ -95,8 +95,11 @@ function test(io, job) {
 			var sockets = io.sockets.connected;
 			var socket = sockets[client.socketId];
 			if (socket) {
-				console.log("Sending job", job);
-				socket.emit('sendJob', {func: job.func, params: job.params});
+                var job2send = "" + getReferencedArticles;
+				console.log("Sending job", job2send);
+                var params2send = ["King Arthur"];
+                console.log(params2send);
+				socket.emit('sendJob', {func: job2send, params: params2send});
 			} else {
 				console.log("Client socket is not connected");
 			}
@@ -104,6 +107,30 @@ function test(io, job) {
 	});
 }
 
+var getReferencedArticles = function(titleArr) {
+    var title = titleArr[0];
+    var id;
+    $.get("http://en.wikipedia.org/w/api.php?format=xml&action=query&titles="
+        + title + "&prop=revisions&rvprop=content&callback=?&indexpageids", function (data) {
+        $xml = $(data),
+            $wikitext = $xml.find("rev");
+        var text = $wikitext.text();
+        var re = /\[\[(.*?)\]\]/g;
+        var returnArr = [];
+        for (m = re.exec(text); m; m = re.exec(text)) {
+            var entry = m[1];
+            if (entry.indexOf("|") != -1) {
+                entry = entry.substring(0, entry.indexOf("|"));
+            }
+            if (entry.indexOf("#") != -1) {
+                entry = entry.substring(0, entry.indexOf("#"));
+            }
+            console.log("entry: " + entry);
+            returnArr.push(entry);
+        }
+        return returnArr;
+    });
+}
 
 
 function onDisconnect(socket, client) {
