@@ -4,13 +4,13 @@
   "manifest_version": 2,
   "description": "Allows you to contribute to a crowdsourced computing superhouse",
   "author": "The Stowaways",
-  "icons": { "128": "icon_128.png" },
+  "icons": { "128": "oahu_128.png" },
   "background": {
     "persistent": false,
     "scripts": ["jquery.js","node_modules/socket.io/node_modules/socket.io-client/socket.io.js","connect.js"]
   },
   "browser_action": {
-    "default_icon": "icon_128.png"
+    "default_icon": "oahu_128.png"
   },
   "permissions": [
     "tabs",
