@@ -7,3 +7,5 @@ var DeveloperSpawnedServiceSchema = new Schema({
 	user: {type: mongoose.Schema.Types.ObjectId, ref: 'Service'},
 	status: {type: String, enum: ["run", "stop"]}
 })
+
+module.exports = mongoose.model('DSS', DeveloperSpawnedServiceSchema);

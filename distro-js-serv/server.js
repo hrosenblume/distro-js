@@ -21,6 +21,10 @@ mongoose.connect('mongodb://localhost:27017/distro');
 var User = require('./models/user');
 var Client = require('./models/client');
 var DSS = require('./models/dss');
+var Job = require('./models/job');
+
+// Initialize servicemanager
+var servicemanager = require('./scripts/servicemanager')
 
 // views as directory for all template files
 app.set('views', path.join(__dirname, 'views'));
