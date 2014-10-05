@@ -11,8 +11,6 @@ var googleStategy = require('passport-google');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-var homeRouter = require('./routes/home');
-
 // Connect to DB
 mongoose.connect('mongodb://localhost:27017/distro');
 
@@ -25,6 +23,10 @@ var Job = require('./models/job');
 // Initialize servicemanager
 var servicemanager = require('./scripts/servicemanager')
 
+// Routers
+var homeRouter = require('./routes/home');
+var jobRouter = require('./routes/job');
+
 // views as directory for all template files
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade'); 
@@ -36,6 +38,7 @@ app.use(bodyParser.urlencoded());
 
 // set routes
 app.use('/', homeRouter);
+app.use('/job/', jobRouter);
 
 // Start service manager
 servicemanager.start(io);

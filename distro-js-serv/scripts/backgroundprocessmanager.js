@@ -1,9 +1,11 @@
 //imports and globals
-var Worker = require('webworker-threads').Worker;
+var Threads = require('webworker-threads');
+// var Parallel = require('paralleljs');
 var processes = [];
 var fs = require('fs');
-
+var service = require('./service');
 var self = this;
+
 
 // Initialize by passing in servicemanager
 self.init = function(servicemanager) {
@@ -12,37 +14,34 @@ self.init = function(servicemanager) {
 	// Pass in DSS for starting
 	self.start = function(dss) {
 		//read the DSS file
-		var path = "../services/" + dss.name + ".js";
-		fs.readFile(path, function(error, data) {
-			if (error) {
-				console.log("you fucked up");
-			} else {
-				// Spawn the worker thread
-				var worker = new Worker(function(){
-					postMessage(data);
-					console.log("Worker spawned");
-					this.onmessage = function(event) {
-					  	if (event.task == 'kill') {
-					  		self.close();
-					  	}
-					}
-				});
-				//worker listener
-				worker.onmessage = function(event) {
-					//job code endpoint... stored in data
-					console.log(event);
-					console.log("Received message from worker");
-					if (event.data.task == 'sendJob') {
-						servicemanager.addJob({
-							dss: dss._id,
-							func: event.data.func,
-							params: event.data.params
-						});
-					}
-				};
-				processes[dss.name] = worker;
+		var path = "/../services/" + dss.filename + ".js";
+
+		var worker = new Threads.Worker(__dirname + path);
+		worker.postMessage({task: 'init', path: path})
+	// 	//worker listener
+		worker.onmessage = function(event) {
+			//job code endpoint... stored in data
+			if (event.data.task == 'sendJob') {
+				console.log("Received request to send job");
+
+					servicemanager.addJob({
+						dss: dss._id,
+						func: "var start = " + event.data.fn,
+						params: event.data.params
+					});
 			}
-		});
+		};
+		console.log(worker);
+
+
+		self.onJobFinish = function(data) {
+			console.log("ONJOBFINISH", data);
+			worker.postMessage({
+				task: 'jobFinished',
+				result: data.result
+			})
+		}
+		// processes[dss.name] = worker;
 	}
 
 	// Kill passed in killed DSS
