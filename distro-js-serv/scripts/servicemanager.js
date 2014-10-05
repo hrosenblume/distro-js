@@ -8,9 +8,21 @@ var Client = mongoose.model('Client');
 var DSS = mongoose.model('DSS');
 var Job = mongoose.model('Job');
 
+// Global control of running state
+var running = true;
+var clients = [];
+
+// Background Process Manager
+// var procManager = require('./backgroundprocessmanager.js');
 
 self.start  = function(){
+	// procManager.init(self);
+	console.log("Starting service manager");
 	// Some logic here
+}
+
+self.kill = function() {
+	running = false;
 }
 
 //Socket Listeners
@@ -21,63 +33,95 @@ self.onConnect = function(socket) {
 	socket.on('sendAuth', function(data) {
 		var browserId = data.browserId;
 		// Update or create client where the status is ready
-		Client.findOneAndUpdate({browserId: browserId}, {status: "ready"},
+		Client.findOneAndUpdate({browserId: browserId},
+			{status: "ready", socketId: socket.id},
 			{upsert: true}, function (err, client) {
 				if (err) {
 					console.log(err);
 				} else {
 					console.log("Client authenticated: " + client);	
+					self.start();
+					// When client disconnects
+					socket.on('disconnect' , function() {
+						onDisconnect(socket, client);
+					});
+
+					// When job completes successfully
+					socket.on('jobSuccess', function(data) {
+						onJobSuccess(socket, client, data);
+					});
+
+					// When job completes with an error
+					socket.on('jobError', function(data) {
+						onJobError(socket, client, data);
+					});
 				}
 		});
 		// Make the client unavailable if they disconnect
-		socket.on('disconnect' ,function() {
-			Client.findOneAndUpdate({browserId: browserId}, {status: "unavailable"},
-				function(err, client) {
-					if  (err) { console.log(err); }
-					else {
-						console.log("Client disconnected: " + client);
-					}
-				})
-		});
+		
 	});
 	//when connect to client
 }
 
-self.onDisconnect = function(socket) {
-	//when disconnect from client
+// LEAVE UNIMPLEMENTED
+//DSS Listeners
+self.addJobToDB = function (job) {
+	Client.find({state: "ready"}, function (err, results) {
+		if (err) {
+			console.log(err);
+		} else {
+			console.log(results);
+		}
+	});
 }
 
-self.onSuccess = function (socket) {
+function onDisconnect(socket, client) {
+	//when disconnect from client
+	Client.update(client, {status: "unavailable"}, function(err, client) {
+		if  (err) { console.log(err); }
+		else {
+			console.log("Client disconnected. ", client);
+		}
+	});
+}
+
+function onJobSuccess(socket, client, data) {
+	Client.update(client, {status: "ready"}, function(err, client) {
+		if (err) {console.log(err); }
+		else {
+			console.log("Client job completed successfully.", data);
+		}
+	});
 	//when job is completed
 }
 
-self.onError = function (socket) {
+function onJobError(socket, client, data) {
+	Client.update(client, {status: "ready"}, function (err, client) {
+		if (err) { console.log(err); }
+		else {
+			console.log("Job error.", data);
+		}
+	});
 	//when job errors out
 }
 
-//DSS Listeners
-self.addJobToDB = function (job) {
-	//adds job to DB on successful connection
-	//between servicemanger and client
-}
-
 //Client Calls to Action
-self.sendJobToClient = function(job, client) {
+function sendJobToClient(job, client) {
 	//changes status of job in database to "running"
 	//sends job directly to the right one
 }
 
-self.killJobOnClient = function (client) {
+function killJobOnClient (client) {
 	//changes status of job in database to "inactive"
 	//sends job directly to the right one
 }
 
 //DSS Calls to Action
-self.startDSS = function (dss) {
+function startDSS (dss) {
 
 }
 
-self.killDSS = function (dss) {
+function killDSS (dss) {
 
 }
 
