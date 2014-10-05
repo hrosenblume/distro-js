@@ -6,7 +6,7 @@ var JobSchema = new Schema({
 	dss: {type: mongoose.Schema.Types.ObjectId, ref: "DSS"},
 	state: {type: String, enum: ["Running", "Failed", "Success"]},
 	func: String,
-	params: [{type: String}],
+	params: [{type: Object}],
 	client: {type: mongoose.Schema.Types.ObjectId, ref: "Client"},
 	added: Date
 })

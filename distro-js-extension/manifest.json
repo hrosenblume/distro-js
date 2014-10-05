@@ -1,0 +1,21 @@
+{
+  "name": "Oahu",
+  "version": "1.0",
+  "manifest_version": 2,
+  "description": "Allows you to contribute to a crowdsourced computing superhouse",
+  "author": "The Stowaways",
+  "icons": { "128": "icon_128.png" },
+  "background": {
+    "persistent": false,
+    "scripts": ["jquery.js","connect.js"]
+  },
+  "browser_action": {
+    "default_icon": "icon_128.png"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}
