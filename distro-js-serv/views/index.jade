@@ -9,8 +9,12 @@ block content
                 h1 Oahu
                 h2 Solve big world problems by surfing the web
             .height-filler 
-                .button-ongreen Do your part
-                .button-ongreen(href="https://docs.google.com/forms/d/1Bcd3EFLIqPw7T0p6G2Rs4PUiE6NlMhyMUMrK40bllic/viewform") Develop on platform
+                //.button-ongreen Do your part
+                //.button-ongreen(href="https://docs.google.com/forms/d/1Bcd3EFLIqPw7T0p6G2Rs4PUiE6NlMhyMUMrK40bllic/viewform") Develop on platform
+                form.form-email
+                    input(type="email", name="email", class="email-input", value="enter your email", onfocus="if (this.value=='enter your email') this.value='';")
+                    br
+                    input.download-button.submit-email(type="submit" value="Submit")
         .intro-text
             .center-attention
                 .two-collumn
@@ -20,8 +24,8 @@ block content
                         p Oahu is a secure in-browser distributed computing system. By downloading the Chrome extension, you can help people solve big problems while surfing the web. Imagine helping scientists sequence DNA for cures and assisting astrophysicists in their quest to understand our universe. 
                         p Hang ten, developers! It only takes three basic Javascript methods to open up your own Oahu instance. Take advantage of the expansive Oahu network.
                         h2 All it takes is a Chrome extension.
-                        .download-button
-                            h2.center Download Oahu from the Chrome Web Store
+                        //.download-button
+                            //h2.center Download Oahu from the Chrome Web Store
                 a.button-ongreen(href="https://docs.google.com/forms/d/1Bcd3EFLIqPw7T0p6G2Rs4PUiE6NlMhyMUMrK40bllic/viewform") Develop on platform
         .aloha
             .center-attention

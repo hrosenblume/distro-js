@@ -98,6 +98,26 @@ body {
     height: 5em;
     position: relative; }
 
+.form-email {
+  margin: 0 auto;
+  width: 310px; }
+  .form-email .email-input {
+    width: 300px;
+    border: 5px solid white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5em;
+    height: 1.5em;
+    color: #808080; }
+  .form-email .submit-email {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5em;
+    border: none;
+    width: 300px; }
+  .form-email .download-button {
+    margin-top: 0.25em; }
+  .form-email input:focus {
+    outline-width: 0; }
+
 .intro-text .center-attention {
   margin: 0 auto;
   max-width: 80em; }
@@ -126,32 +146,33 @@ body {
       .intro-text .two-collumn .panel {
         float: left;
         padding: 1em; } }
-    .intro-text .two-collumn .panel .download-button {
-      text-align: center;
-      display: block;
-      margin: 0 auto;
-      margin-bottom: 2.25em;
-      margin-top: 1.5em;
-      padding: 0.5em;
-      font-weight: 300;
-      color: white;
-      background-color: #fbbb77;
-      cursor: pointer;
-      -webkit-transition: all 0.3s ease-in-out;
-      -moz-transition: all 0.3s ease-in-out;
-      -ms-transition: all 0.3s ease-in-out;
-      -o-transition: all 0.3s ease-in-out;
-      transition: all 0.3s ease-in-out; }
-      .intro-text .two-collumn .panel .download-button:hover {
-        background-color: rgba(251, 187, 119, 0.4);
-        -webkit-transition: all 0.3s ease-in-out;
-        -moz-transition: all 0.3s ease-in-out;
-        -ms-transition: all 0.3s ease-in-out;
-        -o-transition: all 0.3s ease-in-out;
-        transition: all 0.3s ease-in-out; }
   @media (min-width: 960px) {
     .intro-text .two-collumn {
       display: table; } }
+
+.download-button {
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 2.25em;
+  margin-top: 1.5em;
+  padding: 0.5em;
+  font-weight: 300;
+  color: white;
+  background-color: #fbbb77;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out; }
+  .download-button:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out; }
 
 .aloha {
   background-size: cover;
@@ -236,3 +257,5 @@ body {
   height: 30em; }
   .how-to .center-attention .center {
     margin: 0 auto; }
+
+/*# sourceMappingURL=style.css.map */
