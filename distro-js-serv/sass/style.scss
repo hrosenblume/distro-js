@@ -116,8 +116,10 @@ body {
 	margin: 0 auto; 
 	width: ($email-input-width + 10px);
 	.email-input {
-		width: $email-input-width;
-		border: 5px solid white;
+		width: ($email-input-width - 16px);
+		border: none;
+		text-align: center;
+		padding: 5px 8px;
 		font-family: 'Roboto', sans-serif;
 		font-size: 1.5em;
 		height: 1.5em;
@@ -130,6 +132,28 @@ body {
 		font-size: 1.5em;
 		border: none;
 		width: 300px;
+		text-align: center;
+		display: block;
+		margin: 0 auto;
+		margin-bottom: 2.25em;
+		margin-top: 0.5em;
+		padding: 0.5em;
+		font-weight: 300;
+		color: white;
+		background-color: rgba(251, 187, 119, 1.0);
+		cursor: pointer;
+		-webkit-transition: all 0.3s ease-in-out;
+		-moz-transition: all 0.3s ease-in-out;
+		-ms-transition: all 0.3s ease-in-out;
+		-o-transition: all 0.3s ease-in-out;
+		transition: all 0.3s ease-in-out;
+		&:hover {
+		  background-color: rgba(255, 255, 255, 0.4);
+		  -webkit-transition: all 0.3s ease-in-out;
+		  -moz-transition: all 0.3s ease-in-out;
+		  -ms-transition: all 0.3s ease-in-out;
+		  -o-transition: all 0.3s ease-in-out;
+		  transition: all 0.3s ease-in-out;
 	}
 	.download-button {
 		margin-top: 0.25em;
