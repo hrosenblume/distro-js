@@ -20,6 +20,7 @@ var Job = require('./models/job');
 var Client = require('./models/client');
 var Dss = require('./models/dss');
 var User = require('./models/user');
+var Email = require('./models/email');
 
 // Passport config
 require('./config/passport');
@@ -44,7 +45,7 @@ app.set('view engine', 'jade');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({secret: 'wedemboyz'}))
 app.use(passport.initialize());
 app.use(passport.session());

@@ -11,10 +11,17 @@ block content
             .height-filler 
                 //.button-ongreen Do your part
                 //.button-ongreen(href="https://docs.google.com/forms/d/1Bcd3EFLIqPw7T0p6G2Rs4PUiE6NlMhyMUMrK40bllic/viewform") Develop on platform
-                form.form-email
-                    input(type="email", name="email", class="email-input", value="enter your email", onfocus="if (this.value=='enter your email') this.value='';")
+                if locals.fromEmail
+                    h2 Thank you!
                     br
-                    input.download-button.submit-email(type="submit" value="Submit")
+                    h2 We'll be talking soon!
+                else
+                    form(method='post').form-email
+                        input(type="email", name="address", class="email-input", value="enter your email", onfocus="if (this.value=='enter your email') this.value='';")
+                        br
+                        input.download-button.submit-email(type="submit" value="Submit")
+
+
         .intro-text
             .center-attention
                 .two-collumn
