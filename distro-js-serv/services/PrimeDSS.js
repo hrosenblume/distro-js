@@ -21,7 +21,8 @@ function init() {
     var DIFF = 5;
 
     //method
-    var preferred_prime_search = function(start_x, callback) {
+    var preferred_prime_search = function(start_arr, callback) {
+        start_x = parseInt(start_arr[0]);
         //variables
         var internal_start = new Date().getTime();
         var is_prime;
@@ -29,8 +30,10 @@ function init() {
         var total_cycles = 0;
         var results = new Array();
         console.log("Starting with: ", start_x);
-        //body bulk
-        for (var x = start_x; x < start_x + 1000; x++) {
+        // //body bulk
+        var x = start_x;
+        var high = start_x + 10000;
+        for (x; x < high; x++) {
             counter = 2;
             is_prime = true;
             if (x % 2 == 0) {is_prime = false;}
@@ -39,7 +42,6 @@ function init() {
                     is_prime = false;
                 }
                 counter++;
-                console.log(counter);
             }
             total_cycles+=(counter-1);
             results.push({value: x, prime: is_prime});
@@ -87,9 +89,10 @@ function init() {
     //var functionAsString = "" + raw_prime_search;
 
     //add the jobs
-    // for (var x = 3; x ; x+=DIFF) {
+    var interval = 10000;
+    for (var x = 3; x < 100*interval ; x += interval) {
         postMessage({task: 'sendJob', fn: functionAsString, params: x});
-    // }
+    }
 }
 
 function onJobFinished(contents) {

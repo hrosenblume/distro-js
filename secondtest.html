@@ -7,7 +7,7 @@
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 </head>
 <script type="text/javascript">
-    var socket = io("http://oahujs.com/");
+    var socket = io("http://localhost:3000");
     var token = getRandomToken();
 
     socket.on('requestAuth', function(data) {
@@ -18,7 +18,7 @@
         console.log("Received job", job);
 
         eval(job.func);
-
+        console.log(start);
         start(job.params, function(entries) {
             console.log(entries);
             socket.emit('jobSuccess', {result: entries});
