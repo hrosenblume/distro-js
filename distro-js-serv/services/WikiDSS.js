@@ -4,11 +4,11 @@
 var hashTable = [];
 
 this.onmessage = function(event) {
-    if (event.data.task == 'kill') { 
+    if (event.data.task == 'kill') {
         console.log('KILL');
-    } else if (event.data.task == 'init') { 
-        console.log('INIT');  
-        init(); 
+    } else if (event.data.task == 'init') {
+        console.log('INIT');
+        init();
     } else if (event.data.task == 'jobFinished') {
         console.log("JOB FINISHED");
         onJobFinished(event.data.result);
@@ -62,7 +62,7 @@ var rawTitles = "590:10:AccessibleComputing \
     var functionAsString = "" + getReferencedArticles;
 
     for (var i = 0; i < titles.length; i++) {
-        postMessage({task: 'sendJob', fn: functionAsString, params: [titles[i]]}); 
+        postMessage({task: 'sendJob', fn: functionAsString, params: [titles[i]]});
         // Sends message up to be sent to a client
     }
 }

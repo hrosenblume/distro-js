@@ -21,6 +21,7 @@ var Client = require('./models/client');
 var Dss = require('./models/dss');
 var User = require('./models/user');
 var Email = require('./models/email');
+var PrimeJob = require('./models/primeJob');
 
 // Passport config
 require('./config/passport');

@@ -1,16 +1,17 @@
 /**
  * Created by AltonjiC on 10/4/14.
  */
-var mongoose = require('../mongoose');
-var PrimeJob = mongoose.model('PrimeJob');
+//var mongoose = require('../mongoose');
+//var PrimeJob = mongoose.model('PrimeJob');
+//var serv = require("service.js");
 
 function init() {
-    start = new Date().getTime();
-    var MAX = 1003;
+    //start = new Date().getTime();
+    var MAX = 103;
     var DIFF = 5;
 
     //method
-    var preferred_prime_search = function(start_x) {
+    var preferred_prime_search = function(start_x, callback) {
         //variables
         var internal_start = new Date().getTime();
         var is_prime;
@@ -18,7 +19,7 @@ function init() {
         var total_cycles = 0;
         var results = new Array();
         //body bulk
-        for (var x = start_x; x < x+DIFF; x++) {
+        for (var x = start_x; x < x+5; x++) {
             counter = 2;
             is_prime = true;
             if (x % 2 == 0) {is_prime = false;}
@@ -34,12 +35,12 @@ function init() {
         //end, metric calculations, and return
         var internal_end = new Date().getTime();
         var internal_time = internal_end - internal_start;
-        internal_time = internal_time / 1000; //end time in 
+        internal_time = internal_time / 1000; //end time in
         var avg_cycles = total_cycles / (max - 3);
         console.log(avg_cycles); //avergae clock cycles
         console.log(time); // time
         results.push([avg_cycles, internal_time]); //add metrics into it
-        return results;
+        callback(results);
     }
 
     var raw_prime_search = function() {
@@ -73,7 +74,7 @@ function init() {
 
     //add the jobs
     for (var x = 3; x < MAX; x+=DIFF) {
-        serv.addJob(functionAsString, x);
+        postMessage({task: 'sendJob', fn: functionAsString, params: x});
     }
 }
 

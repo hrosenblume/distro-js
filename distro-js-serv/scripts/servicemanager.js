@@ -51,6 +51,7 @@ self.start  = function(io){
 						// At this point the client can accept jobs
 						getJob(function (job) {
 							if (job) {
+                                console.log("got job!");
 								sendJobToClient(job, client)
 							}
 						});
