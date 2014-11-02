@@ -38,7 +38,7 @@ self.init = function(servicemanager) {
 			console.log("ONJOBFINISH", data);
 			worker.postMessage({
 				task: 'jobFinished',
-				result: data.result
+				result: data.result.length
 			})
 		}
 		processes[dss._id] = self;
