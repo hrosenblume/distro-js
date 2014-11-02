@@ -1,3 +1,5 @@
+importScripts('https://cdn.socket.io/socket.io-1.1.0.js', 'https://code.jquery.com/jquery-1.11.0.min.js');
+
 var socket = io("http://oahujs.com");
 var token = getRandomToken();
 

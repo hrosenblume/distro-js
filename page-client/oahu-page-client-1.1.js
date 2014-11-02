@@ -1,0 +1,1 @@
+var worker = new Worker('http://oahujs.com/code/oahu-worker-1.0.js');
