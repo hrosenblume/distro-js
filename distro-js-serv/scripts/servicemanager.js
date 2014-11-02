@@ -9,7 +9,9 @@ var Dss = mongoose.model('DSS');
 var Job = mongoose.model('Job');
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
-
+Job.remove({}, function(err) {
+	console.log("Removing all jobs from queue");
+})
 
 // Background Process Manager
 var procManager = require('./backgroundprocessmanager.js');

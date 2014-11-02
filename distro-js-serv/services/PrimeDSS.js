@@ -90,7 +90,7 @@ function init() {
 
     //add the jobs
     var interval = 10000;
-    for (var x = 3; x < 100*interval ; x += interval) {
+    for (var x = 3; x < 10*interval ; x += interval) {
         postMessage({task: 'sendJob', fn: functionAsString, params: x});
     }
 }
