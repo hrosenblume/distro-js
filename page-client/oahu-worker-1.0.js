@@ -1,12 +1,13 @@
-importScripts('https://cdn.socket.io/socket.io-1.1.0.js', 'https://code.jquery.com/jquery-1.11.0.min.js');
+importScripts('https://cdn.socket.io/socket.io-1.1.0.js');
 
-var socket = io("http://oahujs.com");
+var socket = io("localhost:3001");
 var token = getRandomToken();
 
 socket.on('requestAuth', function(data) {
     console.log("Authenticate");
     socket.emit('sendAuth', {browserId: token})
 });
+
 socket.on('sendJob', function(job) {
     console.log("Received job", job);
 
